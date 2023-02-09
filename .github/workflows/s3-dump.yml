@@ -1,0 +1,15 @@
+name: Upload CHANGELOG to S3
+on: [push]
+jobs:
+  upload-files-to-s3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: qoqa/action-s3-cp@v1.1
+        env:
+          AWS_S3_BUCKET: s3://misc.arthursgonzaga
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'us-east-1'
+          AWS_S3_PATH: '/github.io/readme.md'
+          FILE: 'readme.md'
